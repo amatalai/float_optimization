@@ -23,7 +23,17 @@ Benchee.run(
   %{
     "floor/1" => fn -> Enum.each(data, &Float.floor/1) end,
     "floor/2 precision 0" => fn -> Enum.each(data, &Float.floor(&1, 0)) end,
-    "floor/2 prevision 1" => fn -> Enum.each(data, &Float.floor(&1, 1)) end
+    "floor/2 precision 1" => fn -> Enum.each(data, &Float.floor(&1, 1)) end
+  },
+  memory_time: 2,
+  unit_scaling: :none
+)
+
+Benchee.run(
+  %{
+    "round/1" => fn -> Enum.each(data, &Float.round/1) end,
+    "round/2 precision 0" => fn -> Enum.each(data, &Float.round(&1, 0)) end,
+    "round/2 precision 1" => fn -> Enum.each(data, &Float.round(&1, 1)) end
   },
   memory_time: 2,
   unit_scaling: :none

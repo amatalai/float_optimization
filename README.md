@@ -1,8 +1,8 @@
 # FloatOptimization
-Benchmarks and property based tests for https://github.com/elixir-lang/elixir/pull/7891
+Benchmarks and property based tests for https://github.com/elixir-lang/elixir/pull/7891 and https://github.com/elixir-lang/elixir/pull/7899
 
 ## Correctness
-Run `mix test` with any elixir version without my changes to Float.ceil/2 and Float.floor/2
+Run `mix test` with any elixir version without my changes to Float.ceil/2, Float.floor/2 and Float.round/2
 
 ## Benchmarks
 Run `mix run lib/benchmarks.exs` with different elixir versions
@@ -66,4 +66,22 @@ Name                          ips        average  deviation         median      
 floor/1                  46143.92       21.67 μs    ±21.94%          21 μs          39 μs
 floor/2 precision 0      38185.79       26.19 μs    ±25.95%          25 μs          48 μs
 floor/2 prevision 1        366.04     2731.93 μs     ±4.39%        2698 μs        3201 μs
+```
+
+### Round
+
+#### Before changes
+```
+Name                          ips        average  deviation         median         99th %
+round/1                    382.08     2617.25 μs     ±3.97%        2590 μs     3031.20 μs
+round/2 precision 0        377.92     2646.05 μs     ±4.09%        2621 μs     3064.80 μs
+round/2 precision 1        351.24     2847.02 μs     ±6.13%        2804 μs     3648.76 μs
+```
+
+#### After changes (float |> :erlang.round |> :erlang.float)
+```
+Name                          ips        average  deviation         median         99th %
+round/1                  20596.03       48.55 μs    ±18.17%          47 μs          91 μs
+round/2 precision 0      20096.23       49.76 μs    ±17.50%          48 μs          91 μs
+round/2 precision 1        354.77     2818.69 μs     ±4.28%        2795 μs     3292.34 μs
 ```
